@@ -1,33 +1,64 @@
 class User {
-  int Uid;
-  String Uname = "";
+  String uId = "NULL";
+  String uName = "";
   bool sex;
   int age;
+  
   //찜하기 추가 예정
 
-  User(this.Uid, this.Uname, this.sex, this.age);
+  User(this.uName,this.sex,this.age);
+
+  Map<String, dynamic> toJson() => {
+    'uId' : uId,
+    'uName' : uName,
+    'sex' : sex,
+    'age' : age,
+  };
 }
 
 class Fest {
   //카테고리 추가 예정
-  int Fid;
-  String Fname = "";
-  DateTime Fstart;
-  DateTime Fend;
+  String fId = "NULL";
+  String fName = "";
+  DateTime fStart;
+  DateTime fEnd;
   int price;
   String location = "";
-  double Fstars;
+  double fStars;
   String image;
-  Fest(this.Fid,this.Fname, this.Fstart, this.Fend, this.price, this.location,this.Fstars,this.image);
+  
+  Fest(this.fName, this.fStart, this.fEnd, this.price, this.location,this.fStars,this.image);
+
+  Map<String, dynamic> toJson() => {
+    'fId' : fId,
+    'fName' : fName,
+    'fStart' : fStart,
+    'fEnd' : fEnd,
+    'price' : price,
+    'location' : location,
+    'fStars' : fStars,
+    'image' : image,
+  };
 }
 
 class Review{
-  int Rid;
-  double Rstars;
-  String content;
-  String Rname;
-  int Uid;
-  int Fid;
-  String Rimage;
-  Review(this.Rid,this.Rstars,this.content,this.Rname,this.Uid,this.Fid,this.Rimage);
+  String rId = "NULL";
+  double rStars;
+  String content = "";
+  String rName = "";
+  String uId = "NULL";
+  String fId = "NULL";
+  String rImage = "";
+
+  Review(this.rId,this.rStars,this.content,this.rName,this.uId,this.fId,this.rImage);
+
+  Map<String, dynamic> toJson() => {
+    'rId' : fId,
+    'rStars' : rStars,
+    'content' : content,
+    'rName': rName,
+    'uId' : uId,
+    'fId' : fId,
+    'rImage' : rImage,
+  };
 }
