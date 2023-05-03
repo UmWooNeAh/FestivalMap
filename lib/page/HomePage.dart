@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:festivalmap/page/model/HomePageFestivalObject.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,6 @@ class _HomePageState extends State<HomePage> {
   int value = 1;
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -115,36 +115,27 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Image.asset("assets/img_1.png", fit: BoxFit.fitHeight,),
-                  ),
 
-
-                  Expanded(
-                    child : Padding(
-                      padding: EdgeInsets.fromLTRB(0,0,20,0),
-                      child:Container(
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          children: [
-                            Text("2023 Daegu Hiphop Festival"),
-                            Text("asdf"),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              HomePageFestivalObject(
+                festivalTitle: "2023 Daegu Hiphop Festival",
+                festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
               ),
-              Row(),
+              Divider(height: 10,),
+              HomePageFestivalObject(
+                  festivalTitle: "2023 Daegu Hiphop Festival",
+                  festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
+              ),
+              Divider(height: 10,),
+              HomePageFestivalObject(
+                  festivalTitle: "2023 Daegu Hiphop Festival",
+                  festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
+              ),
+              Divider(height: 10,),
+              HomePageFestivalObject(
+                  festivalTitle: "2023 Daegu Hiphop Festival",
+                  festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
+              ),
+
             ],
           )
         ],

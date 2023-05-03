@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:festivalmap/page/Bookmark.dart';
 import 'package:festivalmap/page/FestivalDetailPage.dart';
 import 'package:festivalmap/page/HomePage.dart';
@@ -23,16 +22,15 @@ class MyApp extends StatelessWidget {
       title: "FestivalMap",
       initialRoute: "/FestivalMap",
       theme: ThemeData(primarySwatch: Colors.grey,),
-      home: const FestivalMap(),
       getPages: [
-        GetPage(name: '/', page: () => const FestivalMap()),
-        GetPage(name: '/HomePage',           page: () => const HomePage(),),
-        GetPage(name: '/MapPage',            page: () => const MapPage(),),
-        GetPage(name: '/mypage',             page: () => const MyPage(),),
-        GetPage(name: '/Bookmark',           page: () => const Bookmark(),),
+        GetPage(name: '/',                   page: () => const FestivalMap()        ),
+        GetPage(name: '/HomePage',           page: () => const HomePage(),          ),
+        GetPage(name: '/MapPage',            page: () => const MapPage(),           ),
+        GetPage(name: '/MyPage',             page: () => const MyPage(),            ),
+        GetPage(name: '/Bookmark',           page: () => const Bookmark(),          ),
         GetPage(name: '/FestivalDetailPage', page: () => const FestivalDetailPage(),),
-        GetPage(name: '/Menu',               page: () => const Menu(),),
-        GetPage(name: '/ReviewList',         page: () => const ReviewList(),),
+        GetPage(name: '/Menu',               page: () => const Menu(),              ),
+        GetPage(name: '/ReviewList',         page: () => const ReviewList(),        ),
       ],
     );
   }
@@ -49,22 +47,27 @@ class _FestivalMapState extends State<FestivalMap> {
   @override
   void initState(){
     super.initState();
+
     Timer(Duration(seconds: 1), (){
-      Get.offAll(
-        () => HomePage(),
-        transition: Transition.leftToRightWithFade,
-        duration: Duration(seconds: 1),
-      );
-    });
+        Get.offAll(
+          () => HomePage(),
+          transition: Transition.leftToRight,
+          duration: Duration(seconds: 1),
+        );
+      }
+    );
+
   }
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Container(
         child: Image.asset("assets/엄우넹.png"),
         alignment: Alignment.center,
       ),
+
     );
   }
 }

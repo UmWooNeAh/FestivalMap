@@ -53,7 +53,7 @@ class _MyPageState extends State<MyPage> {
             menuDivider,
             Row(
               children: [
-                Image.asset("assets/006-bookmark-1.png"),
+                Image.asset("assets/unselectedBookmark.png"),
                 Text("내가 어떤 리뷰를 썼을까요?"),
               ],
             ),
