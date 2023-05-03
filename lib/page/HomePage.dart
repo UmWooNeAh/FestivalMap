@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -164,6 +166,7 @@ class _HomePageState extends State<HomePage> {
             onTap: (value) {
               setState(() {
                 index = value;
+                Get.toNamed('Menu');
               });
             },
           ),
@@ -178,6 +181,7 @@ class _HomePageState extends State<HomePage> {
             onTap: (value) {
               setState(() {
                 index = value;
+                Get.toNamed('MapPage');
               });
             },
           ),
@@ -191,6 +195,7 @@ class _HomePageState extends State<HomePage> {
             onTap: (value) {
               setState(() {
                 index = value;
+                Get.toNamed('Bookmark');
               });
             },
           ),
@@ -205,6 +210,7 @@ class _HomePageState extends State<HomePage> {
             onTap: (value) {
               setState(() {
                 index = value;
+                Get.toNamed("mypage");
               });
             },
           ),

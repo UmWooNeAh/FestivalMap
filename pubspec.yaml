@@ -39,6 +39,7 @@ dependencies:
   naver_map_plugin:
     git: https://github.com/LBSTECH/naver_map_plugin.git
   floating_bottom_bar: ^0.0.2
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
