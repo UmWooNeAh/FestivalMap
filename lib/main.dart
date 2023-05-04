@@ -5,7 +5,7 @@ import 'package:festivalmap/page/HomePage.dart';
 import 'package:festivalmap/page/MapPage.dart';
 import 'package:festivalmap/page/Menu.dart';
 import 'package:festivalmap/page/ReviewList.dart';
-import 'package:festivalmap/page/mypage.dart';
+import 'package:festivalmap/page/MyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,9 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "FestivalMap",
       initialRoute: "/FestivalMap",
-      theme: ThemeData(primarySwatch: Colors.grey,),
+      theme: ThemeData(primarySwatch: Colors.pink,),
       getPages: [
         GetPage(name: '/',                   page: () => const FestivalMap()        ),
         GetPage(name: '/HomePage',           page: () => const HomePage(),          ),
@@ -51,8 +52,8 @@ class _FestivalMapState extends State<FestivalMap> {
     Timer(Duration(seconds: 1), (){
         Get.offAll(
           () => HomePage(),
-          transition: Transition.leftToRight,
-          duration: Duration(seconds: 1),
+          transition: Transition.fadeIn,
+          duration: Duration(seconds: 2),
         );
       }
     );

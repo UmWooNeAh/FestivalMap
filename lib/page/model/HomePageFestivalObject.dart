@@ -24,9 +24,9 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
   void initState(){
     super.initState();
 
-    Star = 1;
-    Bookmark = 1;
-    StarState  = unselectedStar;
+    Star           = 1;
+    Bookmark       = 1;
+    StarState      = unselectedStar;
     BookmarkState  = unselectedBookmark;
   }
 
@@ -51,7 +51,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
           child : Container(
             height: 150, margin: EdgeInsets.fromLTRB(0,0,20,0),
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
@@ -61,15 +61,18 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),),
                 ),
+
                 Container(
-                  height: 70,
+                  height: 90,
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(Description),
                 ),
+
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
-                        onPressed: (){
+                    GestureDetector(
+                        onTap: (){
                           setState(() {
                             Star = Star * -1;
                             StarState = Star == 1 ? unselectedStar : selectedStar;
@@ -77,9 +80,9 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                         },
                         child: StarState,
                     ),
-                    Text("1234"),
-                    ElevatedButton(
-                      onPressed: (){
+                    Padding(padding: EdgeInsets.fromLTRB(5,0,10,0), child: Text("1234"),),
+                    GestureDetector(
+                      onTap: (){
                         setState(() {
                           Bookmark *= -1;
                           BookmarkState = Bookmark == 1 ? unselectedBookmark : selectedBookmark;
@@ -87,7 +90,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                       },
                       child: BookmarkState,
                     ),
-                    Text("1234"),
+                    Padding(padding: EdgeInsets.fromLTRB(5,0,10,0), child: Text("1234"),),
                   ],
                 ),
               ],
