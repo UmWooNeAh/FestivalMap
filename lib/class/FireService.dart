@@ -6,7 +6,6 @@ class FireService{
   static final FireService _fireService = FireService._internal();
   factory FireService() => _fireService;
   FireService._internal();
-  FirebaseStorage.instance.ref();
   //각각 사용할 때 FireService().함수명
 
   //Create
@@ -27,7 +26,7 @@ class FireService{
     final json = review.toJson();
     await docReview.set(json);
   }
-  //Read
+  //Readamic>?' can't be assigned to the parameter type 'Map<String, dynamic>'.
   Future<List<User>> readAllUsers() async{
     //모든 유저 데이터 들고오기
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -37,13 +36,12 @@ class FireService{
     return _result;
   }
 
-  Future<List<User>> readUserByName(String name) async{
+  Future<User> readUserByName(String name) async{
     //해당 이름의 유저 들고오기
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    QuerySnapshot<Map<String,dynamic>> _snapshot =
-    await _firestore.collection("User").where("uName",isEqualTo: name).get();
-    List<User> _result = _snapshot.docs.map((e) => User.fromJson(e.data())).toList();
-    return _result;
+    var result = await _firestore.collection('User').doc(name).get();
+    User user = User.fromJson(result.data()!);
+    return user;
   }
 
   Future<List<Fest>> readAllFests() async{
@@ -53,6 +51,14 @@ class FireService{
     await _firestore.collection("Fest").get();
     List<Fest> _result = _snapshot.docs.map((e) => Fest.fromJson(e.data())).toList();
     return _result;
+  }
+
+  Future<Fest> readFestByName(String name) async{
+    //해당 이름의 유저 들고오기
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    var result = await _firestore.collection('Fest').doc(name).get();
+    Fest fest = Fest.fromJson(result.data()!);
+    return fest;
   }
 
   Future<List<Review>> readAllReviews() async{
@@ -80,11 +86,29 @@ class FireService{
     docUser.set(newData.toJson());
   }
 
+  void addUserBookmark(String uName,String fName) async {
+    final docUser = FirebaseFirestore
+        .instance.collection("User").doc(uName);
+    readUserByName(uName).then((value){
+      value.bookMark.add(fName);
+      docUser.set(value.toJson());
+    });
+  }
+
   void changeFest(String name,Fest newData) async {
     final docFest = FirebaseFirestore
         .instance.collection("Fest").doc(name);
     newData.fName = name;
     docFest.set(newData.toJson());
+  }
+
+  void changeFestStars(String fName,double stars) async {
+    final docFest = FirebaseFirestore
+        .instance.collection("Fest").doc(fName);
+    readFestByName(fName).then((value){
+      value.fStars = stars;
+      docFest.set(value.toJson());
+    });
   }
 
   void changeReview(String name,Review newData) async {

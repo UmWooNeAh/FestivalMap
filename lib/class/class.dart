@@ -3,7 +3,6 @@ class User {
   bool sex;
   int age;
   List<String> bookMark = [];
-  //찜하기 추가 예정
 
   User({required this.uName,required this.sex,required this.age,required this.bookMark});
 
