@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:festivalmap/class/class.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class FireService{
   static final FireService _fireService = FireService._internal();
   factory FireService() => _fireService;
   FireService._internal();
+  FirebaseStorage.instance.ref();
   //각각 사용할 때 FireService().함수명
 
   //Create
@@ -72,16 +74,46 @@ class FireService{
   }
   //Update
   void changeUser(String name,User newData) async {
-    DocumentSnapshot<Map<String, dynamic>> _data = await FirebaseFirestore
-        .instance.collection("User").doc(name).get();
+    final docUser = FirebaseFirestore
+        .instance.collection("User").doc(name);
     newData.uName = name;
-
-    await FirebaseFirestore.collection("User").doc(name).set(newData)
-
+    docUser.set(newData.toJson());
   }
+
+  void changeFest(String name,Fest newData) async {
+    final docFest = FirebaseFirestore
+        .instance.collection("Fest").doc(name);
+    newData.fName = name;
+    docFest.set(newData.toJson());
+  }
+
+  void changeReview(String name,Review newData) async {
+    //rId : uName + fName
+    final docReview = FirebaseFirestore
+        .instance.collection("Review").doc(name);
+    newData.rId = name;
+    docReview.set(newData.toJson());
+  }
+
   //Delete
-  void delUser(int classId, String name){
-
+  void delUser(String name){
+    final docUser = FirebaseFirestore
+        .instance.collection("User").doc(name);
+    docUser.delete();
   }
+
+  void delFest(String name){
+    final docUser = FirebaseFirestore
+        .instance.collection("Fest").doc(name);
+    docUser.delete();
+  }
+
+  void delReview(String name){
+    final docUser = FirebaseFirestore
+        .instance.collection("Review").doc(name);
+    docUser.delete();
+  }
+
+
 
 }

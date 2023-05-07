@@ -2,27 +2,29 @@ class User {
   String uName = "";
   bool sex;
   int age;
-  
+  List<String> bookMark = [];
   //찜하기 추가 예정
 
-  User({required this.uName,required this.sex,required this.age});
+  User({required this.uName,required this.sex,required this.age,required this.bookMark});
 
   factory User.fromJson(Map<String,dynamic> json){
     return User(
       uName: json["uName"],
       sex: json["sex"],
       age: json["age"],
+      bookMark : json["bookMark"],
     );
   }
   Map<String, dynamic> toJson() => {
     'uName' : uName,
     'sex' : sex,
     'age' : age,
+    'bookMark' : bookMark,
   };
 }
 
 class Fest {
-  //카테고리 추가 예정
+  List<String> category = [];
   String fName = "";
   DateTime fStart;
   DateTime fEnd;
@@ -31,10 +33,11 @@ class Fest {
   double fStars;
   String image;
   
-  Fest({required this.fName, required this.fStart, required this.fEnd, required this.price, required this.location,required this.fStars,required this.image});
+  Fest({required this.category,required this.fName, required this.fStart, required this.fEnd, required this.price, required this.location,required this.fStars,required this.image});
 
   factory Fest.fromJson(Map<String,dynamic> json){
     return Fest(
+      category: json['category'],
       fName : json['fName'],
       fStart : json['fStar'],
       fEnd : json['fEnd'],
@@ -45,6 +48,7 @@ class Fest {
     );
   }
   Map<String, dynamic> toJson() => {
+    'category' : category,
     'fName' : fName,
     'fStart' : fStart,
     'fEnd' : fEnd,
