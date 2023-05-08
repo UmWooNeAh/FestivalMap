@@ -68,6 +68,7 @@ class _MenuState extends State<Menu> {
                     style: ElevatedButton.styleFrom(
                       primary:Colors.transparent,
                       elevation: 0.0,
+                      shadowColor: Colors.transparent,
                     )
                 ),
               ],
