@@ -39,7 +39,7 @@ dependencies:
   firebase_core: 2.10.0
   get: 4.6.5
   cloud_firestore: 4.5.2
-
+  file_picker: 5.2.11
 dev_dependencies:
   flutter_test:
     sdk: flutter

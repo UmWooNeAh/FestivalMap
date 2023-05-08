@@ -1,6 +1,8 @@
+import 'package:festivalmap/class/FireStorage.dart';
 import 'package:festivalmap/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'dart:developer';
 import 'class/class.dart';
 import 'class/FireService.dart';
@@ -17,8 +19,8 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
+  // This widget is the
+  // root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,55 +61,84 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final controllerName = TextEditingController();
+  final controllerAge = TextEditingController();
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  Widget buildUser(User user) => ListTile(
+    leading:CircleAvatar(child:Text('${user.age}')),
+    title:Text(user.uName),
+    subtitle:Text(user.bookMark.toString()),
+  );
 
   @override
-  Widget build(BuildContext context) {
-    final controller = TextEditingController();
-    return Scaffold(
-      appBar: AppBar(
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+     title: Text('Add User'),
 
-        title: Text(widget.title),
-        actions: [
-          IconButton(
-            icon : const Icon(Icons.add),
-            onPressed: () {
-              FireService().readUserByName('admin');
-              User user = User("Test",false,100);
-              FireService().createUser(user);
-            },
-          ),
-        ],
+    ),
+    body:Column( //사진 추가 예제
+      children: [
+        Center(
+          child: ElevatedButton(
+            onPressed: (){
+              List<String> file;
+              FireStorage().selectFile().then((String path){
+                FireStorage().uploadFile(path).then((value)=>print('Done'));
+              });
+              },
+            child:Text('Upload File'),
+          )
+        )
+      ],
+    )
+    /*ListView( //Create 예제
+       padding:EdgeInsets.all(16),
+       children: <Widget>[
+       TextField(
+         controller : controllerName,
+         decoration: decoration('Name'),
+       ),
+       const SizedBox(height:24),
+       TextField(
+         controller: controllerAge,
+         decoration: decoration('Age'),
+         keyboardType: TextInputType.number,
 
-      ),
-      body: Center(
+       ),
+       const SizedBox(height:32),
+       ElevatedButton(
+         child: Text('Create'),
+         onPressed: () {
+           List<String> a = ["ab","bb","cc"];
+           final user = User(
+             uName : controllerName.text,
+             age: int.parse(controllerAge.text),
+             bookMark : a,
+             sex : false,
+           );
+           print(FireService().readAllUsers());
+           Navigator.pop(context);
+         },
+       ),*/
+      /* //Read 예제
+       FutureBuilder<User>(
+         future: FireService().readUserByName('Park'),
+         builder:(context,snapshot){
+           if(snapshot.hasData){
+             final users = snapshot.data!;
+             return buildUser(users);
+           }
+           else{
+             return Center(child:CircularProgressIndicator());
+           }
+         }),
+       */
 
-        child: Column(
 
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'hdi',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-       // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
+  );
+
+  InputDecoration decoration(String label) => InputDecoration(
+    labelText: label,
+    border: OutlineInputBorder(),
+  );
 }

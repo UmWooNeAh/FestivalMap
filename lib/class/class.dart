@@ -11,7 +11,7 @@ class User {
       uName: json["uName"],
       sex: json["sex"],
       age: json["age"],
-      bookMark : json["bookMark"],
+      bookMark : List<String>.from(json["bookMark"]),
     );
   }
   Map<String, dynamic> toJson() => {

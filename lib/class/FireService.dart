@@ -36,6 +36,13 @@ class FireService{
     return _result;
   }
 
+  Stream<List<User>> readUsers() =>
+      FirebaseFirestore.instance.collection('User')
+          .snapshots()
+          .map((snapshot)=>snapshot.docs.map((doc)
+                =>User.fromJson(doc.data())).toList());
+
+
   Future<User> readUserByName(String name) async{
     //해당 이름의 유저 들고오기
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
