@@ -17,16 +17,19 @@ class _MyPageState extends State<MyPage> {
 
     Divider menuDivider = Divider(
       thickness: 1,
-      indent: 20,
-      endIndent: 20,
-      color: firstColor,
+      indent: 30,
+      endIndent: 30,
+      color: Colors.grey,
     );
 
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
         backgroundColor: thirdColor,
-        title: Text("My Page", style: TextStyle(color: firstColor,),),
+        title: Text("마이페이지", style: TextStyle(
+            fontSize: 20, color: Colors.black)
+        ),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings, color: Colors.black,),
@@ -34,32 +37,59 @@ class _MyPageState extends State<MyPage> {
           ),
         ],
       ),
-      body: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(20),
-              child: Image.asset("assets/001-smile.png"),
-            ),
-            Row(
+      body:
+          Center(
+            child: Column(
+              children: [
+              SizedBox(width: 0,height: 30),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Image.asset("assets/001-smile.png"),
+              ),
+             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Text("조우석 님",),
+                Text("조우석\t\t님", style: TextStyle(
+                    fontSize: 25)),
+                SizedBox(width:10, height:0),
+                ElevatedButton(
+                  onPressed: (){},
+                  child: Image(image: AssetImage("assets/MyPage_edit.png"),
+                    width: 20,height: 20),
+                  style: ElevatedButton.styleFrom(
+                  primary:Colors.transparent,
+                  elevation: 0.0,
+                  shadowColor: Colors.transparent,
+                  ),
                 ),
-                ElevatedButton(onPressed: (){}, child: Icon(Icons.add)),
               ],
             ),
+            SizedBox(width: 0,height: 40),
             menuDivider,
-            Row(
-              children: [
-                Image.asset("assets/unselectedBookmark.png"),
-                Text("내가 어떤 리뷰를 썼을까요?"),
-              ],
+            ElevatedButton(
+              onPressed: (){},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width:30, height:0),
+                  Image(image: AssetImage("assets/MyPage_message.png")
+                    ,width: 50,height: 50),
+                  SizedBox(width:50, height:0),
+                  Text("내가 어떠한 리뷰를 썼을까요?", style: TextStyle(
+                    fontSize: 20, color: Colors.black)
+                  ),
+                ],
+            ),
+            style: ElevatedButton.styleFrom(
+              primary:Colors.transparent,
+              elevation: 0.0,
+              shadowColor: Colors.transparent,
+            ),
             ),
             menuDivider,
           ]
+        ),
       ),
-    );
+      );
   }
 }
