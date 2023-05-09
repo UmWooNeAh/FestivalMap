@@ -43,7 +43,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
           padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.asset("assets/img_1.png", fit: BoxFit.fitHeight,),
+            child: Image.asset("assets/DaeguHipFe_Poster.png", fit: BoxFit.fitHeight,),
           ),
         ),
 
