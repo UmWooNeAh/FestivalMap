@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "FestivalMap",
-      initialRoute: "/FestivalMap",
+      initialRoute: "/",
       theme: ThemeData(primarySwatch: Colors.pink,),
       getPages: [
         GetPage(name: '/',                   page: () => const FestivalMap()        ),

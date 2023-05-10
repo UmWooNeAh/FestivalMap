@@ -1,8 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:festivalmap/class/FireService.dart';
 import 'package:festivalmap/page/model/HomePageCategoyButton.dart';
 import 'package:festivalmap/page/model/HomePageFestivalObject.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../class/class.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,11 +18,14 @@ class _HomePageState extends State<HomePage> {
   final List<String> eventImages = ['assets/img.png', 'assets/img.png', 'assets/img.png',];
   final homePageFlowerButton = Image.asset("assets/HomePageFlowerButton.png", fit: BoxFit.fitWidth,);
   final homePageGuitarButton = Image.asset("assets/HomePageGuitarButton.png", fit: BoxFit.fitWidth,);
+
   int bannerIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    late List<String> festivalNames = [];
+
 
     return Scaffold(
       appBar: AppBar(
@@ -91,37 +97,32 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text("#요즘 핫한 페스티벌", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
-              ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text("#요즘 핫한 페스티벌", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
+          ),
 
-              HomePageFestivalObject(
-                festivalTitle: "2023 Daegu Hiphop Festival",
-                festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
-              ),
-              Container(height: 10,),
-              HomePageFestivalObject(
-                  festivalTitle: "2023 Daegu Hiphop Festival",
-                  festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
-              ),
-              Container(height: 10,),
-              HomePageFestivalObject(
-                  festivalTitle: "2023 Daegu Hiphop Festival",
-                  festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
-              ),
-              Container(height: 10,),
-              HomePageFestivalObject(
-                  festivalTitle: "2023 Daegu Hiphop Festival",
-                  festivalDescription: "대한민국 최고의 힙합 페스티벌 '대구힙합페스티벌'이 돌아온다!"
-              ),
-              Container(height: 120,),
+          FutureBuilder(
+            future: FireService().readAllFests(),
+            builder : (BuildContext context, AsyncSnapshot snapshot){
+              if (snapshot.hasData == false){
+                print("엄");
+                return CircularProgressIndicator();
+              }
+              else{
+                print("준");
+                List<Fest> fest = snapshot.data;
+                fest.sort((a,b) => a.fStars.compareTo(b.fStars));
+                fest.take(3).forEach((element) {festivalNames.add(element.fName);});
 
-            ],
-          )
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: festivalNames.map((name) => HomePageFestivalObject(festivalName: name)).toList(),
+                );
+              }
+            },
+          ),
+
         ],
       ),
 
