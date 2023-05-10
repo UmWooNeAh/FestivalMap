@@ -7,14 +7,18 @@ class CategoryButton extends StatelessWidget {
   const CategoryButton({Key? key, required this.categoryName}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: Text(categoryName, textAlign: TextAlign.center),
-      onPressed: (){},
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
+    return Container(
+        margin: EdgeInsets.all(5),
+        child: ElevatedButton(
+          child: Text(categoryName, textAlign: TextAlign.center, style: TextStyle(color: Colors.black),),
+          onPressed: (){},
+          style: ElevatedButton.styleFrom(
+            shadowColor: Colors.white,
+            shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)),
-        backgroundColor: Color(0xE8E5EB),
-      ),
+            backgroundColor: Color(0xffE8E5EB),
+        ),
+      )
     );
   }
 }
@@ -31,9 +35,9 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(alignment: Alignment.center, child: Text("카테고리"),
-        ),
         backgroundColor: Colors.white,
+        title: Text("카테고리", style: TextStyle(color: Colors.black)),
+        centerTitle: true,
       ),
       body:
       Column(
@@ -68,90 +72,54 @@ class _MenuState extends State<Menu> {
                     style: ElevatedButton.styleFrom(
                       primary:Colors.transparent,
                       elevation: 0.0,
-                      shadowColor: Colors.transparent,
+                      shadowColor: Colors.white,
                     )
                 ),
               ],
             ),
           ),
           Container(
-            child: Text("계절"),
+            child: Text("계절", style: TextStyle(fontWeight: FontWeight.bold),),
             padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
+              SizedBox(width:10, height: 0,),
               CategoryButton(categoryName: "봄"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
               CategoryButton(categoryName: "여름"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
               CategoryButton(categoryName: "가을"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
               CategoryButton(categoryName: "겨울"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
             ],
           ),
-          Divider(thickness: 0.5, indent: 20, endIndent: 20, color: Colors.black),
+          Divider(thickness: 0.5, indent: 10, endIndent: 10, color: Colors.black),
           Container(
-            child: Text("지역"),
+            child: Text("지역", style: TextStyle(fontWeight: FontWeight.bold),),
             padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          Column(
             children: [
-              SizedBox(
-                height: 1,
-                width: 10,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                SizedBox(width:10, height: 0,),
+                CategoryButton(categoryName: "서울"),
+                CategoryButton(categoryName: "경기"),
+                CategoryButton(categoryName: "대구"),
+                CategoryButton(categoryName: "부산"),
+                CategoryButton(categoryName: "울산"),
+              ],
               ),
-              CategoryButton(categoryName: "서울"),
-              SizedBox(
-                height: 1,
-                width: 10,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width:10, height: 0,),
+                  CategoryButton(categoryName: "경북"),
+                ],
               ),
-              CategoryButton(categoryName: "경기"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
-              CategoryButton(categoryName: "대구"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
-              CategoryButton(categoryName: "부산"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
-              CategoryButton(categoryName: "울산"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
-              CategoryButton(categoryName: "경북"),
-              SizedBox(
-                height: 1,
-                width: 10,
-              ),
+              Divider(thickness: 0.5, indent: 10, endIndent: 10, color: Colors.black),
             ],
           ),
-          Divider(thickness: 0.5, indent: 20, endIndent: 20, color: Colors.black),
         ],
       ),
     );
