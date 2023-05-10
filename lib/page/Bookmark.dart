@@ -1,13 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+List<BookmarkContainer> list = [
+  BookmarkContainer(Fid: 1, Fname: "2023 대구 힙합 페스티벌",
+      content: "---", Fimage: Image(image: AssetImage("assets/DaeguHipFe_Poster.png"))),
+  BookmarkContainer(Fid: 2, Fname: "2023 울산 고래 축제",
+      content: "---", Fimage: Image(image: AssetImage("assets/WhaleFe_Poster.jpg"))),
+];
+
 class BookmarkContainer extends StatefulWidget {
   final int Fid;
   final String Fname;
   final String content;
   final Image Fimage;
 
-  const BookmarkContainer({Key? key, required this.Fid, required this.Fname,  required this.content,
+  const BookmarkContainer({Key? key, required this.Fid, required this.Fname, required this.content,
     required this.Fimage}) : super(key: key);
 
   @override
@@ -15,8 +22,14 @@ class BookmarkContainer extends StatefulWidget {
 }
 
 class _BookmarkContainerState extends State<BookmarkContainer> {
-  bool isPressed = false;
 
+  void deleteContainer(int id) {
+    setState(() {
+      list.removeWhere((container) => container.Fid == id);
+    });
+  }
+
+  bool isPressed = false;
   late int Fid;
   late String Fname;
   late String content;
@@ -68,10 +81,15 @@ class _BookmarkContainerState extends State<BookmarkContainer> {
                             fontWeight: FontWeight.bold ,fontSize: 15)),
                       ),
                       IconButton(
-                        icon: isPressed ? Image.asset("assets/selectedBookmark.png", width: 25,height: 25 ):Image.asset("assets/005-bookmark.png", width: 25,height: 25 ),
+                        icon: isPressed ? Image.asset("assets/005-bookmark.png", width: 25,height: 25 )
+                            :Image.asset("assets/selectedBookmark.png", width: 25,height: 25 ),
                         onPressed: () {
-                          setState(() {
-                            isPressed = !isPressed;
+                            setState(() {
+                              isPressed = !isPressed;
+                              deleteContainer(Fid);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('해당 축제가 찜 목록에서 삭제되었습니다.')),
+                            );
                           });
                         },
                       ),
@@ -98,9 +116,15 @@ class Bookmark extends StatefulWidget {
 }
 
 class _BookmarkState extends State<Bookmark> {
+
+  Future<void> _refreshItems() async {
+    // 새로고침 작업 수행
+    await Future.delayed(Duration(seconds: 2));
+    setState(() { });
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
@@ -110,15 +134,24 @@ class _BookmarkState extends State<Bookmark> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          SizedBox(width:0, height: 40,),
-        BookmarkContainer(Fid: 1, Fname: "2023 대구 힙합 페스티벌",
-            content: "---", Fimage: Image(image: AssetImage("assets/DaeguHipFe_Poster.png"))),
-        BookmarkContainer(Fid: 1, Fname: "2023 울산 고래 축제",
-        content: "---", Fimage: Image(image: AssetImage("assets/WhaleFe_Poster.jpg"))),
-      ],
+      body:  list.isEmpty ? Center(
+        child: Text(
+          '현재 찜한 축제가 없어요.',
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        ),
+      )
+      : RefreshIndicator(
+        onRefresh: _refreshItems,
+        child: ListView.builder(
+        itemCount: list.length, itemBuilder: (context, index) {
+        return Column(
+                children: [
+                   list[index]
+                 ],
+           );
+       }
+      ),
       ),
     );
-  }
+    }
 }

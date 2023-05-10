@@ -1,6 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+List<ReviewContainer> list = [
+  ReviewContainer(Fid: 100, Rid: 1, Uid: 1, RDate: "2023.04.27", Fname: "2023 대구 힙합 페스티벌",
+    Rname: "hello", content: "너무 재밌어요!", Rimage: Image(image: AssetImage("assets/DageuHipFe_Review.jpg"),
+        width: 150, height: 150),),
+  ReviewContainer(Fid: 101, Rid: 2, Uid: 1,  RDate: "2023.04.27", Fname: "2023 대구 힙합 페스티벌",
+    Rname: "hello", content: "너무 재밌어요!", Rimage: Image(image: AssetImage("assets/WhaleFe_Review.jpg"),
+        width: 150, height: 150),)
+];
+
 class ReviewContainer extends StatefulWidget {
   final int Fid;
   final int Rid;
@@ -21,7 +30,11 @@ class ReviewContainer extends StatefulWidget {
 
 class _ReviewContainerState extends State<ReviewContainer> {
 
-  bool isWidgetVisible = true;
+  void deleteContainer(int id) {
+    setState(() {
+      list.removeWhere((container) => container.Rid == id);
+    });
+  }
 
   late int Fid;
   late int Rid;
@@ -71,7 +84,10 @@ class _ReviewContainerState extends State<ReviewContainer> {
               IconButton(
                 icon: Image.asset('assets/001-bin.png', width: 25, height: 25),
                 onPressed: () {
-                    isWidgetVisible = false;
+                  deleteContainer(Rid);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('해당 리뷰가 삭제되었습니다.')),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.transparent,
@@ -114,6 +130,13 @@ class ReviewList extends StatefulWidget {
 }
 
 class _ReviewListState extends State<ReviewList> {
+
+  Future<void> _refreshItems() async {
+    // 새로고침 작업 수행
+    await Future.delayed(Duration(seconds: 2));
+    setState(() { });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,19 +149,27 @@ class _ReviewListState extends State<ReviewList> {
         ),
         title: Text("리뷰목록", style: TextStyle(
         fontSize: 20, color: Colors.black)
-    ),
-    centerTitle: true,
-    ),
-    body: Column(
-        children: [
-         ReviewContainer(Fid: 1, Rid: 1, Uid: 1, RDate: "2023.04.27", Fname: "2023 대구 힙합 페스티벌",
-           Rname: "hello", content: "너무 재밌어요!", Rimage: Image(image: AssetImage("assets/DageuHipFe_Review.jpg"),
-               width: 150, height: 150),),
-          ReviewContainer(Fid: 2, Rid: 2, Uid: 1,  RDate: "2023.04.27", Fname: "2023 대구 힙합 페스티벌",
-            Rname: "hello", content: "너무 재밌어요!", Rimage: Image(image: AssetImage("assets/WhaleFe_Review.jpg"),
-                width: 150, height: 150),),
-        ],
-    ),
-  );
-  }
+        ),
+        centerTitle: true,
+        ),
+        body: list.isEmpty ? Center(
+          child: Text(
+            '현재 쓴 리뷰가 없어요.\n  리뷰를 남겨주세요!',
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+        )
+        : RefreshIndicator(
+        onRefresh: _refreshItems,
+        child: ListView.builder(
+          itemCount: list.length, itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  list[index]
+                  ]
+                );
+        }
+      ),
+      ),
+    );
+    }
 }
