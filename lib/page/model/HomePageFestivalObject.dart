@@ -77,7 +77,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           selectedStar,
-                          Padding(padding: EdgeInsets.fromLTRB(5,0,10,0), child: Text(snapshot.data.fStars),),
+                          Padding(padding: EdgeInsets.fromLTRB(5,0,10,0), child: Text(snapshot.data.fStars.toString()),),
                           GestureDetector(
                             onTap: (){
                               setState(() {

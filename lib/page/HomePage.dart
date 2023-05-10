@@ -114,10 +114,17 @@ class _HomePageState extends State<HomePage> {
                 List<Fest> fest = snapshot.data;
                 fest.sort((a,b) => a.fStars.compareTo(b.fStars));
                 fest.take(3).forEach((element) {festivalNames.add(element.fName);});
+                print(List.generate(festivalNames.length, (index) => HomePageFestivalObject(festivalName: festivalNames[index])));
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: festivalNames.map((name) => HomePageFestivalObject(festivalName: name)).toList(),
+                  children:[
+                    HomePageFestivalObject(festivalName: festivalNames[0]),
+                    HomePageFestivalObject(festivalName: festivalNames[1]),
+                    HomePageFestivalObject(festivalName: festivalNames[2]),
+                  ],
+                    //festivalNames.forEach((fest){HomePageFestivalObject(festivalName: fest);})
+
                 );
               }
             },

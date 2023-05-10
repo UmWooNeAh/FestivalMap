@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 class FireService{
   static final FireService _fireService = FireService._internal();
   factory FireService() => _fireService;
+
   FireService._internal();
   //각각 사용할 때 FireService().함수명
 
@@ -53,10 +54,12 @@ class FireService{
 
   Future<List<Fest>> readAllFests() async{
     //모든 축제 데이터 들고오기
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
     QuerySnapshot<Map<String,dynamic>> _snapshot =
-    await _firestore.collection("Fest").get();
+    await FirebaseFirestore.instance.collection("Fest").get();
+
+    //print(_snapshot.docs[0].data());
     List<Fest> _result = _snapshot.docs.map((e) => Fest.fromJson(e.data())).toList();
+    print("hi");
     return _result;
   }
 

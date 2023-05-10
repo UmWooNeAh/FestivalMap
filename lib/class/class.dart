@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class User {
   String uName = "";
   bool sex;
@@ -25,26 +27,32 @@ class User {
 class Fest {
   List<String> category = [];
   String fName = "";
-  DateTime fStart;
-  DateTime fEnd;
+  Timestamp fStart;
+  Timestamp fEnd;
   int price;
   String location = "";
   double fStars;
   String image;
   
-  Fest({required this.category,required this.fName, required this.fStart, required this.fEnd, required this.price, required this.location,required this.fStars,required this.image});
+  Fest({required this.category,required this.fName, required this.fStart,
+    required this.fEnd, required this.price,
+    required this.location,required this.fStars,
+    required this.image});
 
   factory Fest.fromJson(Map<String,dynamic> json){
-    return Fest(
-      category: json['category'],
+
+    Fest n = Fest(
+      category: List<String>.from(json["category"]),
       fName : json['fName'],
-      fStart : json['fStar'],
+      fStart : json['fStart'],
       fEnd : json['fEnd'],
       price : json['price'],
       location : json['location'],
       fStars : json['fStars'],
       image : json['image'],
     );
+    print(n);
+    return n;
   }
   Map<String, dynamic> toJson() => {
     'category' : category,
