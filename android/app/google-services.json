@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "156423571659",
+    "project_id": "festivemap",
+    "storage_bucket": "festivemap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156423571659:android:20f7aacc058e862301734e",
+        "android_client_info": {
+          "package_name": "com.example.festivalmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156423571659-pp342objgpeb7dlv77n1qfd1pit0uucd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnZUJ-7kzFjQNzw9WO3Ff5HxANFo161iQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156423571659-pp342objgpeb7dlv77n1qfd1pit0uucd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
