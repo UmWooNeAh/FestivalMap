@@ -71,7 +71,7 @@ class _ReviewContainerState extends State<ReviewContainer> {
               IconButton(
                 icon: Image.asset('assets/001-bin.png', width: 25, height: 25),
                 onPressed: () {
-                    dispose();
+                    isWidgetVisible = false;
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.transparent,

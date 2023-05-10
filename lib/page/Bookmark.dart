@@ -1,6 +1,95 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class BookmarkContainer extends StatefulWidget {
+  final int Fid;
+  final String Fname;
+  final String content;
+  final Image Fimage;
+
+  const BookmarkContainer({Key? key, required this.Fid, required this.Fname,  required this.content,
+    required this.Fimage}) : super(key: key);
+
+  @override
+  State<BookmarkContainer> createState() => _BookmarkContainerState();
+}
+
+class _BookmarkContainerState extends State<BookmarkContainer> {
+  bool isPressed = false;
+
+  late int Fid;
+  late String Fname;
+  late String content;
+  late Image Fimage;
+
+  @override
+  void initState() {
+    Fid = widget.Fid;
+    Fname = widget.Fname;
+    content = widget.content;
+    Fimage = widget.Fimage;
+  }
+  @override
+  Widget build(BuildContext context) {
+    Divider menuDivider = Divider(
+      thickness: 1,
+      color: Colors.grey,
+    );
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.pinkAccent,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(15.0)
+      ),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(width: 10, height: 0),
+              Container(
+                width: 130, height:130,
+                child: Fimage,
+              ),
+              SizedBox(width:20, height:0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 170,
+                        child: Text(Fname, style: TextStyle(
+                            fontWeight: FontWeight.bold ,fontSize: 15)),
+                      ),
+                      IconButton(
+                        icon: isPressed ? Image.asset("assets/selectedBookmark.png", width: 25,height: 25 ):Image.asset("assets/005-bookmark.png", width: 25,height: 25 ),
+                        onPressed: () {
+                          setState(() {
+                            isPressed = !isPressed;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  menuDivider,
+                  Text(content, style: TextStyle(
+                      fontSize: 13)),
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class Bookmark extends StatefulWidget {
   const Bookmark({Key? key}) : super(key: key);
 
@@ -8,16 +97,10 @@ class Bookmark extends StatefulWidget {
   State<Bookmark> createState() => _BookmarkState();
 }
 
-
 class _BookmarkState extends State<Bookmark> {
-  bool isPressed = false;
-  bool isPressed2 = false;
   @override
   Widget build(BuildContext context) {
-    Divider menuDivider = Divider(
-      thickness: 1,
-      color: Colors.grey,
-    );
+
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
@@ -30,113 +113,11 @@ class _BookmarkState extends State<Bookmark> {
       body: Column(
         children: [
           SizedBox(width:0, height: 40,),
-          Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.pinkAccent,
-                  width: 2.0,
-                ),
-                borderRadius: BorderRadius.circular(15.0)
-            ),
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(width: 10, height: 0),
-                    Container(
-                      width: 130, height:130,
-                      child: Image(image: AssetImage("assets/DaeguHipFe_Poster.png"),),
-                    ),
-                    SizedBox(width:10, height:0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 170,
-                              child: Text("2023 대구 힙합 페스티벌", style: TextStyle(
-                                fontWeight: FontWeight.bold ,fontSize: 15)),
-                            ),
-                            //SizedBox(width: 10, height: 0),
-                            IconButton(
-                              icon: isPressed ? Image.asset("assets/selectedBookmark.png", width: 25,height: 25 ):Image.asset("assets/005-bookmark.png", width: 25,height: 25 ),
-                              onPressed: () {
-                                setState(() {
-                                  isPressed = !isPressed;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        menuDivider,
-                        Text("-----", style: TextStyle(
-                            fontSize: 13)),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.fromLTRB(0, 5, 10, 5),
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.pinkAccent,
-                  width: 2.0,
-                ),
-                borderRadius: BorderRadius.circular(15.0)
-            ),
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(width: 10, height: 0),
-                    Container(
-                      width: 130, height:130,
-                      child: Image(image: AssetImage("assets/WhaleFe_Poster.jpg"),),
-                    ),
-                    SizedBox(width:10, height:0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              width: 170,
-                              child: Text("2023 울산 고래 축제", style: TextStyle(
-                                  fontWeight: FontWeight.bold ,fontSize: 15)),
-                            ),
-                            //SizedBox(width: 10, height: 0),
-                            IconButton(
-                              icon: isPressed2 ? Image.asset("assets/selectedBookmark.png", width: 25,height: 25 ):Image.asset("assets/005-bookmark.png", width: 25,height: 25 ),
-                              onPressed: () {
-                                setState(() {
-                                  isPressed2 = !isPressed2;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        menuDivider,
-                        Text("-----", style: TextStyle(
-                            fontSize: 13)),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-        ],
+        BookmarkContainer(Fid: 1, Fname: "2023 대구 힙합 페스티벌",
+            content: "---", Fimage: Image(image: AssetImage("assets/DaeguHipFe_Poster.png"))),
+        BookmarkContainer(Fid: 1, Fname: "2023 울산 고래 축제",
+        content: "---", Fimage: Image(image: AssetImage("assets/WhaleFe_Poster.jpg"))),
+      ],
       ),
     );
   }

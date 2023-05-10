@@ -29,7 +29,7 @@ class _HomePageCategoryButtonState extends State<HomePageCategoryButton> {
           width: 40, height: 40, margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: FilledButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent,),
-            onPressed: (){setState(() {Get.toNamed("ReviewList");});},
+            onPressed: (){setState(() {Get.toNamed("Bookmark");});},
             child: Container(),
           ),
         ),
