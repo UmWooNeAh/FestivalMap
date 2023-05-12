@@ -28,8 +28,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
               child: Stack(
                 children: [
                   CustomPaint(
-                    size: Size(size.width, 90),
+                    size: Size(size.width, 80),
                     painter: BNBCustomPainter(),
+                    isComplex: false,
                   ),
                   Center(
                     child: FloatingActionButton(
@@ -54,15 +55,17 @@ class BNBCustomPainter extends CustomPainter{
     Paint paint = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
+
     Path path = Path()
-      ..moveTo(0, 30)
-      ..lineTo(size.width * 0.4, 30)
-      ..quadraticBezierTo(size.width * 0.5, 0, size.width * 0.6, 30)
-      ..lineTo(size.width, 30)
+      ..moveTo(0, 16)
+      ..lineTo(size.width * 0.5 - 42.4, 16)
+      ..quadraticBezierTo(size.width * 0.5, 0, size.width * 0.5 + 42.4, 16)
+      ..lineTo(size.width, 16)
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height)
       ..close();
-    canvas.drawShadow(path, Colors.black, 5, true);
+
+    canvas.drawShadow(path.shift(Offset(0, -3)), Colors.black, 5.0, true);
     canvas.drawPath(path, paint);
   }
 
