@@ -58,7 +58,7 @@ class _FestivalMapState extends State<FestivalMap> {
 
     Timer(Duration(seconds: 1), (){
         Get.offAll(
-          () => HomePage(),
+          () => MapPage(),
           transition: Transition.fadeIn,
           duration: Duration(seconds: 2),
         );
