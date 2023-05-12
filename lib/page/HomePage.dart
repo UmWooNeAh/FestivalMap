@@ -4,7 +4,6 @@ import 'package:festivalmap/page/model/HomePageCategoyButton.dart';
 import 'package:festivalmap/page/model/HomePageFestivalObject.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../class/class.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,46 +14,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> eventImages = ['assets/img.png', 'assets/img.png', 'assets/img.png',];
+  // CategoryButton image setting
   final homePageFlowerButton = Image.asset("assets/HomePageFlowerButton.png", fit: BoxFit.fitWidth,);
   final homePageGuitarButton = Image.asset("assets/HomePageGuitarButton.png", fit: BoxFit.fitWidth,);
 
+  // bannerindex initialization
   int bannerIndex = 1;
 
   @override
   Widget build(BuildContext context) {
+    final List<String> eventImages = ['assets/img.png', 'assets/img.png', 'assets/img.png',];
     final Size size = MediaQuery.of(context).size;
     late List<String> festivalNames = [];
-
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text("Festival Map", style: TextStyle(color: Colors.pinkAccent),),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search_sharp, color: Colors.black,),
-            onPressed: () {},
-          ),
+          IconButton(icon: Icon(Icons.search_sharp, color: Colors.black,), onPressed: () {},),
         ],
       ),
 
       body: ListView(
         children: [
-          //Event Banner
+          //Banner Object
           Stack(
             alignment: AlignmentDirectional.bottomEnd,
             children: [
+              // Dragable banner image
               Container(
                 child: CarouselSlider(
                   options: CarouselOptions(
                     viewportFraction: 1,
                     onPageChanged: (index, reason){setState(() {bannerIndex = index + 1;});}),
-                    items: eventImages.map((item) => Container(child: Image.asset(item, fit: BoxFit.fitHeight),),
+                    items: eventImages.map((item) => Image.asset(item, fit: BoxFit.fitHeight),
                   ).toList(),
                 ),
               ),
 
+              // Banner index box
               Container(
                 child: Text("<$bannerIndex/${eventImages.length}>", style: TextStyle(color: Colors.white),),
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -63,6 +62,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
 
+          // Category button first row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -74,10 +74,12 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
 
+          // Category Button second row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               HomePageCategoryButton(buttonImage: homePageGuitarButton),
+              // Random generated category button
               Container(
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 width: size.width * 0.5,
@@ -97,6 +99,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
 
+          // start of festival object
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text("#요즘 핫한 페스티벌", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),),
@@ -106,25 +109,18 @@ class _HomePageState extends State<HomePage> {
             future: FireService().readAllFests(),
             builder : (BuildContext context, AsyncSnapshot snapshot){
               if (snapshot.hasData == false){
-                print("엄");
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator(),);
               }
               else{
-                print("준");
+                // all festival data
                 List<Fest> fest = snapshot.data;
                 fest.sort((a,b) => a.fStars.compareTo(b.fStars));
                 fest.take(3).forEach((element) {festivalNames.add(element.fName);});
-                print(List.generate(festivalNames.length, (index) => HomePageFestivalObject(festivalName: festivalNames[index])));
 
+                // festival object generation
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
-                    HomePageFestivalObject(festivalName: festivalNames[0]),
-                    HomePageFestivalObject(festivalName: festivalNames[1]),
-                    HomePageFestivalObject(festivalName: festivalNames[2]),
-                  ],
-                    //festivalNames.forEach((fest){HomePageFestivalObject(festivalName: fest);})
-
+                  children: List.generate(3, (index) => HomePageFestivalObject(festivalName: festivalNames[index],))
                 );
               }
             },
