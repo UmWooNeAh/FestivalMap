@@ -33,10 +33,168 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     isComplex: false,
                   ),
                   Center(
-                    child: FloatingActionButton(
-                      onPressed: (){},
-                      backgroundColor: Colors.pink,
-                      //child: Icon()),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          bottom: -30,
+                          left: size.width/2 - 50,
+                          child: SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: FittedBox(
+                              child: FloatingActionButton(
+                                child: Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: LinearGradient(
+                                      begin: Alignment(0.0, -0.5),
+                                      end: Alignment.bottomCenter,
+                                      colors: [ Color(0xffff498b), Color(0xfffff174) ]
+                                    ),
+                                  ),
+                                ),
+                                onPressed: (){},
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: size.width,
+                    height: 80,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: size.width * 0.19,
+                              height: 46,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/004-category-1.png', width: 30, height: 30,),
+                                  Text("카테고리",
+                                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 11, color: Color(0xff888888)),
+                                  )
+                                ],
+                              ),
+                              margin: EdgeInsets.fromLTRB(0, 26, 0, 0),
+                            ),
+                            Container(
+                              child: Opacity(
+                                opacity: 0,
+                                child: Container(
+                                width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
+                                    onPressed: (){},
+                                    child: Container(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Stack(
+                          children: [
+                            Container(
+                              width: size.width * 0.19,
+                              height: 46,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/003-maps-and-flags-1.png', width: 30, height: 30,),
+                                  Text("지도",
+                                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 11, color: Color(0xff888888)),
+                                  )
+                                ],
+                              ),
+                              margin: EdgeInsets.fromLTRB(0, 26, 0, 0),
+                            ),
+                            Container(
+                              child: Opacity(
+                                opacity: 0,
+                                child: Container(
+                                  width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
+                                    onPressed: (){},
+                                    child: Container(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(width: size.width * 0.24,),
+                        Stack(
+                          children: [
+                            Container(
+                              width: size.width * 0.19,
+                              height: 46,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/unselectedBookmark.png', width: 30, height: 30,),
+                                  Text("북마크",
+                                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 11, color: Color(0xff888888)),
+                                  )
+                                ],
+                              ),
+                              margin: EdgeInsets.fromLTRB(0, 26, 0, 0),
+                            ),
+                            Container(
+                              child: Opacity(
+                                opacity: 0,
+                                child: Container(
+                                  width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
+                                    onPressed: (){},
+                                    child: Container(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Stack(
+                          children: [
+                            Container(
+                              width: size.width * 0.19,
+                              height: 46,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/001-smile.png', width: 30, height: 30,),
+                                  Text("마이페이지",
+                                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 11, color: Color(0xff888888)),
+                                  )
+                                ],
+                              ),
+                              margin: EdgeInsets.fromLTRB(0, 26, 0, 0),
+                            ),
+                            Container(
+                              child: Opacity(
+                                opacity: 0,
+                                child: Container(
+                                  width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
+                                    onPressed: (){},
+                                    child: Container(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -57,10 +215,10 @@ class BNBCustomPainter extends CustomPainter{
       ..style = PaintingStyle.fill;
 
     Path path = Path()
-      ..moveTo(0, 16)
-      ..lineTo(size.width * 0.5 - 42.4, 16)
-      ..quadraticBezierTo(size.width * 0.5, 0, size.width * 0.5 + 42.4, 16)
-      ..lineTo(size.width, 16)
+      ..moveTo(0, 18.4)
+      ..lineTo(size.width * 0.5 - 43.9, 18.4)
+      ..quadraticBezierTo(size.width * 0.5, -18.4, size.width * 0.5 + 43.9, 18.4)
+      ..lineTo(size.width, 18.4)
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height)
       ..close();
