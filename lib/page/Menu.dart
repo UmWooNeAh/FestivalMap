@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 
 class CategoryButton extends StatelessWidget {
   final String categoryName;
@@ -66,6 +66,7 @@ class _MenuState extends State<Menu> {
                 ),
                 ElevatedButton(
                     onPressed: () {
+                      Get.toNamed("SearchList");
                       //검색 버튼 클릭시 축제 목록 보여주기
                     },
                     child: Image.asset("assets/search.png", height:25, width:25,),

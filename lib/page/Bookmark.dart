@@ -42,6 +42,7 @@ class _BookmarkContainerState extends State<BookmarkContainer> {
     content = widget.content;
     Fimage = widget.Fimage;
   }
+
   @override
   Widget build(BuildContext context) {
     Divider menuDivider = Divider(
@@ -81,17 +82,39 @@ class _BookmarkContainerState extends State<BookmarkContainer> {
                             fontWeight: FontWeight.bold ,fontSize: 15)),
                       ),
                       IconButton(
-                        icon: isPressed ? Image.asset("assets/005-bookmark.png", width: 25,height: 25 )
-                            :Image.asset("assets/selectedBookmark.png", width: 25,height: 25 ),
-                        onPressed: () {
-                            setState(() {
-                              isPressed = !isPressed;
-                              deleteContainer(Fid);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('해당 축제가 찜 목록에서 삭제되었습니다.')),
-                            );
-                          });
-                        },
+                          icon: isPressed ? Image.asset("assets/005-bookmark.png", width: 25,height: 25 )
+                              :Image.asset("assets/selectedBookmark.png", width: 25,height: 25 ),
+                          onPressed: () {
+                            {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('북마크 해제'),
+                                    content: Text('북마크를 해제하시겠습니까?'),
+                                    actions: [
+                                      TextButton(
+                                        child: Text('취소'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop(); // 다이얼로그 닫기
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: Text('삭제'),
+                                        onPressed: () {
+                                          isPressed = !isPressed;
+                                          deleteContainer(Fid);
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text('해당 축제가 찜 목록에서 삭제되었습니다.')));
+                                          Navigator.of(context).pop();// 다이얼로그 닫기
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            };
+                          }
                       ),
                     ],
                   ),
@@ -140,18 +163,18 @@ class _BookmarkState extends State<Bookmark> {
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
       )
-      : RefreshIndicator(
+          : RefreshIndicator(
         onRefresh: _refreshItems,
         child: ListView.builder(
-        itemCount: list.length, itemBuilder: (context, index) {
-        return Column(
-                children: [
-                   list[index]
-                 ],
-           );
-       }
-      ),
+            itemCount: list.length, itemBuilder: (context, index) {
+          return Column(
+            children: [
+              list[index]
+            ],
+          );
+        }
+        ),
       ),
     );
-    }
+  }
 }

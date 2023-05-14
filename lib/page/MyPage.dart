@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+String UserName = "조우석";
+Image profileImage = Image.asset("assets/001-smile.png");
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -22,6 +26,7 @@ class _MyPageState extends State<MyPage> {
       color: Colors.grey,
     );
 
+
     return Scaffold(
       appBar: AppBar(
         elevation: 20,
@@ -44,22 +49,23 @@ class _MyPageState extends State<MyPage> {
               SizedBox(width: 0,height: 30),
               Container(
                 padding: EdgeInsets.all(20),
-                child: Image.asset("assets/001-smile.png"),
+                child: profileImage,
               ),
              Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("조우석\t\t님", style: TextStyle(
+                Text(UserName+ "\t\t님", style: TextStyle(
                     fontSize: 25)),
-                SizedBox(width:10, height:0),
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.toNamed("EditProfile");
+                  },
                   child: Image(image: AssetImage("assets/MyPage_edit.png"),
                     width: 20,height: 20),
                   style: ElevatedButton.styleFrom(
                   primary:Colors.transparent,
                   elevation: 0.0,
-                  shadowColor: Colors.transparent,
+                  shadowColor: Colors.white,
                   ),
                 ),
               ],
@@ -67,14 +73,16 @@ class _MyPageState extends State<MyPage> {
             SizedBox(width: 0,height: 40),
             menuDivider,
             ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                Get.toNamed("ReviewList");
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(width:30, height:0),
                   Image(image: AssetImage("assets/MyPage_message.png")
                     ,width: 50,height: 50),
-                  SizedBox(width:50, height:0),
+                  SizedBox(width:20, height:0),
                   Text("내가 어떠한 리뷰를 썼을까요?", style: TextStyle(
                     fontSize: 20, color: Colors.black)
                   ),
@@ -83,7 +91,7 @@ class _MyPageState extends State<MyPage> {
             style: ElevatedButton.styleFrom(
               primary:Colors.transparent,
               elevation: 0.0,
-              shadowColor: Colors.transparent,
+              shadowColor: Colors.white,
             ),
             ),
             menuDivider,
