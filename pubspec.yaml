@@ -45,6 +45,7 @@ dependencies:
   firebase_core: ^2.10.0
   cloud_firestore: ^4.5.2
   file_picker: ^5.2.11
+  flutter_naver_map: ^1.0.1
 
 dev_dependencies:
   flutter_test:

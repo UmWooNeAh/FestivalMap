@@ -2,8 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:festivalmap/class/FireService.dart';
 import 'package:festivalmap/page/model/HomePageCategoyButton.dart';
 import 'package:festivalmap/page/model/HomePageFestivalObject.dart';
+import 'package:festivalmap/page/viewmodel/HomePageViewController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../class/class.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +25,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> eventImages = ['assets/img.png', 'assets/img.png', 'assets/img.png',];
     final Size size = MediaQuery.of(context).size;
     late List<String> festivalNames = [];
 
@@ -39,29 +40,7 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         children: [
           //Banner Object
-          Stack(
-            alignment: AlignmentDirectional.bottomEnd,
-            children: [
-              // Dragable banner image
-              Container(
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    viewportFraction: 1,
-                    onPageChanged: (index, reason){setState(() {bannerIndex = index + 1;});}),
-                    items: eventImages.map((item) => Image.asset(item, fit: BoxFit.fitHeight),
-                  ).toList(),
-                ),
-              ),
-
-              // Banner index box
-              Container(
-                child: Text("<$bannerIndex/${eventImages.length}>", style: TextStyle(color: Colors.white),),
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(color: Colors.grey,),
-              ),
-            ],
-          ),
-
+          _bannerObject(),
           // Category button first row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,4 +110,36 @@ class _HomePageState extends State<HomePage> {
 
     );
   }
+
+  Widget _bannerObject() {
+    return Obx(() => Stack(
+      alignment: AlignmentDirectional.bottomEnd,
+      children: [
+        // Dragable banner image
+        Container(
+          child: CarouselSlider(
+            options: CarouselOptions(
+                viewportFraction: 1,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    bannerIndex = index + 1;
+                  });
+                }),
+            items: Get.find<HomePageViewController>().eventImages.value.map((item) =>
+                Image.asset(item, fit: BoxFit.fitHeight),
+            ).toList(),
+          ),
+        ),
+
+        // Banner index box
+        Container(
+          child: Text("<$bannerIndex/${Get.find<HomePageViewController>().eventImages.length}>",
+            style: TextStyle(color: Colors.white),),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(color: Colors.grey,),
+        ),
+      ],
+    ));
+  }
+
 }

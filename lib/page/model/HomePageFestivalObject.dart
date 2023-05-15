@@ -80,7 +80,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                           Container(
                             height: 90,
                             padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: Text(snapshot.data.location),
+                            child: Text(snapshot.data.fName),
                           ),
 
                           //festival star, bookmark
