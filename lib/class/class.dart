@@ -27,23 +27,24 @@ class User {
 class Fest {
   List<String> category = [];
   String fName = "";
+  String description = "";
   Timestamp fStart;
   Timestamp fEnd;
   int price;
-  String location = "";
+  GeoPoint location;
   double fStars;
   String image;
-  
-  Fest({required this.category,required this.fName, required this.fStart,
+
+  Fest({required this.category,required this.fName, required this.description,required this.fStart,
     required this.fEnd, required this.price,
     required this.location,required this.fStars,
     required this.image});
 
   factory Fest.fromJson(Map<String,dynamic> json){
-
     Fest n = Fest(
       category: List<String>.from(json["category"]),
       fName : json['fName'],
+      description: json['description'],
       fStart : json['fStart'],
       fEnd : json['fEnd'],
       price : json['price'],
@@ -51,12 +52,14 @@ class Fest {
       fStars : json['fStars'],
       image : json['image'],
     );
-    print(n);
+
+
     return n;
   }
   Map<String, dynamic> toJson() => {
     'category' : category,
     'fName' : fName,
+    'description' : description,
     'fStart' : fStart,
     'fEnd' : fEnd,
     'price' : price,
