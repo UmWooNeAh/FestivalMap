@@ -61,7 +61,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   ),
                                 ),
                                 onPressed: (){
-                                  Get.offAll(() => HomePage());
+                                  Get.toNamed("/HomePage");
                                 },
                               ),
                             ),
@@ -100,7 +100,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
                                     onPressed: (){
-                                      Get.offAll(() => Menu());
+                                      Get.toNamed("/Menu");
                                     },
                                     child: Container(),
                                   ),
@@ -133,7 +133,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
                                     onPressed: (){
-                                      Get.offAll(() => MapPage());
+                                      Get.toNamed("/MapPage");
                                     },
                                     child: Container(),
                                   ),
@@ -167,7 +167,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
                                     onPressed: (){
-                                      Get.offAll(() => Bookmark());
+                                      Get.toNamed("/Bookmark");
                                     },
                                     child: Container(),
                                   ),
@@ -200,7 +200,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
                                     onPressed: (){
-                                      Get.offAll(() => MyPage());
+                                      Get.toNamed("/MyPage");
                                     },
                                     child: Container(),
                                   ),

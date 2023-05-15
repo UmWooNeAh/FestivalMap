@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'model/CustomNavigationBar.dart';
+
 List<BookmarkContainer> list = [
   BookmarkContainer(Fid: 1, Fname: "2023 대구 힙합 페스티벌",
       content: "---", Fimage: Image(image: AssetImage("assets/DaeguHipFe_Poster.png"))),
@@ -157,24 +159,31 @@ class _BookmarkState extends State<Bookmark> {
         ),
         centerTitle: true,
       ),
-      body:  list.isEmpty ? Center(
-        child: Text(
-          '현재 찜한 축제가 없어요.',
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-        ),
+      body:  list.isEmpty ?
+      Stack(
+        children: [
+          Center(
+            child: Text(
+              '현재 찜한 축제가 없어요.',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Positioned(child: BottomNavBar(), bottom: 0, left: 0,),
+        ],
       )
-          : RefreshIndicator(
-        onRefresh: _refreshItems,
-        child: ListView.builder(
-            itemCount: list.length, itemBuilder: (context, index) {
-          return Column(
+      : RefreshIndicator(
+          onRefresh: _refreshItems,
+          child: Stack(
             children: [
-              list[index]
+              ListView.builder(
+                  itemCount: list.length, itemBuilder: (context, index) {
+                    return Column(children: [list[index]],);
+                  }
+              ),
+              Positioned(child: BottomNavBar(), bottom: 0, left: 0,),
             ],
-          );
-        }
+          ),
         ),
-      ),
     );
   }
 }
