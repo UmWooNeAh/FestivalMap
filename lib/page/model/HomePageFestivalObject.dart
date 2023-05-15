@@ -70,7 +70,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                       Container(
                         height: 90,
                         padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(snapshot.data.location.latitude.toString() + " " + snapshot.data.location.longitude.toString()),
+                        child: Text(snapshot.data.description),
                       ),
 
                       Row(
