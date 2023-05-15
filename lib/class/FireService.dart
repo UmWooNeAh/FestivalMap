@@ -11,15 +11,15 @@ class FireService{
 
   //Create
   void createUser(User user) async{
-      final docUser = FirebaseFirestore.instance.collection('User').doc(user.uName);
-      final json = user.toJson();
-      await docUser.set(json);
+    final docUser = FirebaseFirestore.instance.collection('User').doc(user.uName);
+    final json = user.toJson();
+    await docUser.set(json);
   }
 
   void createFest(Fest fest) async{
-      final docFest = FirebaseFirestore.instance.collection('Fest').doc(fest.fName);
-      final json = fest.toJson();
-      await docFest.set(json);
+    final docFest = FirebaseFirestore.instance.collection('Fest').doc(fest.fName);
+    final json = fest.toJson();
+    await docFest.set(json);
   }
 
   void createReview(Review review) async{
@@ -32,7 +32,7 @@ class FireService{
     //모든 유저 데이터 들고오기
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     QuerySnapshot<Map<String,dynamic>> _snapshot =
-        await _firestore.collection("User").get();
+    await _firestore.collection("User").get();
     List<User> _result = _snapshot.docs.map((e) => User.fromJson(e.data())).toList();
     return _result;
   }
@@ -41,7 +41,7 @@ class FireService{
       FirebaseFirestore.instance.collection('User')
           .snapshots()
           .map((snapshot)=>snapshot.docs.map((doc)
-                =>User.fromJson(doc.data())).toList());
+      =>User.fromJson(doc.data())).toList());
 
 
   Future<User> readUserByName(String name) async{

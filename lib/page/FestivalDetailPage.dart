@@ -50,7 +50,12 @@ class _FestivalDetailPageState extends State<FestivalDetailPage> with TickerProv
         else{
           return Scaffold(
             appBar: AppBar(
-              leading: Icon(Icons.arrow_back),
+              leading: ElevatedButton(
+                  child: Icon(Icons.arrow_back),
+                onPressed: (){
+                    Get.back();
+                },
+              ),
             ),
             body: Column(
               children: [

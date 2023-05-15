@@ -30,9 +30,10 @@ class Fest {
   String description = "";
   Timestamp fStart;
   Timestamp fEnd;
-  int price;
+  num price;
+
   GeoPoint location;
-  double fStars;
+  num fStars;
   String image;
 
   Fest({required this.category,required this.fName, required this.description,required this.fStart,
@@ -41,6 +42,7 @@ class Fest {
     required this.image});
 
   factory Fest.fromJson(Map<String,dynamic> json){
+    print(json);
     Fest n = Fest(
       category: List<String>.from(json["category"]),
       fName : json['fName'],

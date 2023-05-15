@@ -49,11 +49,11 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                     ),
                       onPressed: (){Get.toNamed("/FestivalDetailPage", arguments: fName);},
                       child: Container(
-                        height: 150, width: 170,
-                        padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                        height: 150, width: 140,
+                        //padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: Image.asset("assets/img_1.png", fit: BoxFit.fitHeight,),
+                          child: Image.network(snapshot.data.image, fit: BoxFit.cover,),
                         ),
                       ),
                   ),
@@ -80,7 +80,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                           Container(
                             height: 90,
                             padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: Text(snapshot.data.fName),
+                            child: Text(snapshot.data.description),
                           ),
 
                           //festival star, bookmark

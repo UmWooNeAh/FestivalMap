@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
               FutureBuilder(
                 future: FireService().readAllFests(),
                 builder : (BuildContext context, AsyncSnapshot snapshot){
+                  print(snapshot);
                   if (snapshot.hasData == false){
                     return Center(child: CircularProgressIndicator(),);
                   }
@@ -97,16 +98,17 @@ class _HomePageState extends State<HomePage> {
                     // all festival data
                     List<Fest> fest = snapshot.data;
                     fest.sort((a,b) => a.fStars.compareTo(b.fStars));
-                    fest.take(3).forEach((element) {festivalNames.add(element.fName);});
+                    fest.take(4).forEach((element) {festivalNames.add(element.fName);});
 
                     // festival object generation
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(3, (index) => HomePageFestivalObject(festivalName: festivalNames[index],))
+                        children: List.generate(4, (index) => HomePageFestivalObject(festivalName: festivalNames[index],))
                     );
                   }
                 },
               ),
+              Container(height:80),
             ],
           ),
           Positioned(child: BottomNavBar(), bottom: 0, left: 0,),
