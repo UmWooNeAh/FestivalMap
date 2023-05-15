@@ -29,4 +29,9 @@ class FireStorage{
     }
   }
 
+  Future<String> downloadFile(String path,String name) async{
+    String URL = await storage.ref('$path/$name').getDownloadURL();
+
+    return URL;
+  }
 }

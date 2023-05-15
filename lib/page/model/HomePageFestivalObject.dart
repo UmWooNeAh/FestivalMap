@@ -48,7 +48,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                 padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.asset("assets/img_1.png", fit: BoxFit.fitHeight,),
+                  child: Image.network(snapshot.data.image, fit: BoxFit.fitHeight,),
                 ),
               ),
 
@@ -70,7 +70,7 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
                       Container(
                         height: 90,
                         padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(snapshot.data.location),
+                        child: Text(snapshot.data.location.latitude.toString() + " " + snapshot.data.location.longitude.toString()),
                       ),
 
                       Row(

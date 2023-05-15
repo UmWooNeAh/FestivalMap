@@ -30,10 +30,10 @@ class Fest {
   Timestamp fStart;
   Timestamp fEnd;
   int price;
-  String location = "";
+  GeoPoint location;
   double fStars;
   String image;
-  
+
   Fest({required this.category,required this.fName, required this.fStart,
     required this.fEnd, required this.price,
     required this.location,required this.fStars,
