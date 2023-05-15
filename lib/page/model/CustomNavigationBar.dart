@@ -1,3 +1,8 @@
+import 'package:festivalmap/page/Bookmark.dart';
+import 'package:festivalmap/page/HomePage.dart';
+import 'package:festivalmap/page/MapPage.dart';
+import 'package:festivalmap/page/Menu.dart';
+import 'package:festivalmap/page/MyPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +60,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     ),
                                   ),
                                 ),
-                                onPressed: (){},
+                                onPressed: (){
+                                  Get.offAll(() => HomePage());
+                                },
                               ),
                             ),
                           ),
@@ -92,7 +99,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                 width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
-                                    onPressed: (){},
+                                    onPressed: (){
+                                      Get.offAll(() => Menu());
+                                    },
                                     child: Container(),
                                   ),
                                 ),
@@ -123,7 +132,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
-                                    onPressed: (){},
+                                    onPressed: (){
+                                      Get.offAll(() => MapPage());
+                                    },
                                     child: Container(),
                                   ),
                                 ),
@@ -155,7 +166,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
-                                    onPressed: (){},
+                                    onPressed: (){
+                                      Get.offAll(() => Bookmark());
+                                    },
                                     child: Container(),
                                   ),
                                 ),
@@ -186,7 +199,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                   width: size.width * 0.19, height: 60, margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(backgroundColor: Color(0x00000000),),
-                                    onPressed: (){},
+                                    onPressed: (){
+                                      Get.offAll(() => MyPage());
+                                    },
                                     child: Container(),
                                   ),
                                 ),
