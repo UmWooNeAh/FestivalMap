@@ -34,21 +34,34 @@ class _HomePageFestivalObjectState extends State<HomePageFestivalObject> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: FireService().readFestByName(fName),
-      builder: (BuildContext context, AsyncSnapshot snapshot){
-        if(snapshot.hasData == false){
-          return CircularProgressIndicator();
-        }
-        else{
-          return Row(
-            children: [
-              Container(
-                height: 150, width: 170,
-                padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.asset("assets/img_1.png", fit: BoxFit.fitHeight,),
+    String title       = widget.festivalTitle;
+    String Description = widget.festivalDescription;
+
+    return Row(
+      children: [
+
+        Container(
+          height: 150, width: 170,
+          padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.asset("assets/DaeguHipFe_Poster.png", fit: BoxFit.fitHeight,),
+          ),
+        ),
+
+        Expanded(
+          child : Container(
+            height: 150, margin: EdgeInsets.fromLTRB(0,0,20,0),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  height: 30,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),),
                 ),
               ),
 

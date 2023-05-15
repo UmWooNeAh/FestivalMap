@@ -7,6 +7,8 @@ import 'package:festivalmap/page/Menu.dart';
 import 'package:festivalmap/page/ReviewList.dart';
 import 'package:festivalmap/page/MyPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:festivalmap/page/SearchList.dart';
+import 'package:festivalmap/page/EditProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/FestivalDetailPage', page: () => const FestivalDetailPage(),),
         GetPage(name: '/Menu',               page: () => const Menu(),              ),
         GetPage(name: '/ReviewList',         page: () => const ReviewList(),        ),
+        GetPage(name: '/SearchList',         page: () => const SearchList(),        ),
+        GetPage(name: '/EditProfile',         page: () => const EditProfile(),        ),
       ],
     );
   }
