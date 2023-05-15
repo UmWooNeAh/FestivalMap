@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:festivalmap/page/Bookmark.dart';
 
-Image getImage = Image.asset("assets/DageuHipFe_Review.jpg");
+Image getImage = Image.asset("assets/DaeguHipFe_Review.jpg");
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);

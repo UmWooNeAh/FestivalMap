@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 List<ReviewContainer> list = [
   ReviewContainer(Fid: 100, Rid: 1, Uid: 1, RDate: "2023.04.27", Fname: "2023 대구 힙합 페스티벌",
-    Rname: "hello", content: "너무 재밌어요!", Rimage: Image(image: AssetImage("assets/DageuHipFe_Review.jpg"),
+    Rname: "hello", content: "너무 재밌어요!", Rimage: Image(image: AssetImage("assets/DaequHipFe_Review.jpg"),
         width: 150, height: 150),),
   ReviewContainer(Fid: 101, Rid: 2, Uid: 1,  RDate: "2023.04.27", Fname: "2023 대구 힙합 페스티벌",
     Rname: "hello", content: "너무 재밌어요!", Rimage: Image(image: AssetImage("assets/WhaleFe_Review.jpg"),
