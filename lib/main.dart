@@ -6,12 +6,13 @@ import 'package:festivalmap/page/MapPage.dart';
 import 'package:festivalmap/page/Menu.dart';
 import 'package:festivalmap/page/ReviewList.dart';
 import 'package:festivalmap/page/MyPage.dart';
+import 'package:festivalmap/page/viewmodel/HomePageViewController.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:festivalmap/page/SearchList.dart';
 import 'package:festivalmap/page/EditProfile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:get/get.dart';
-
 import 'firebase_options.dart';
 
 void main() async{
@@ -19,6 +20,12 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NaverMapSdk.instance.initialize(
+      clientId: '5cf0rejsbk',
+      onAuthFailed: (error) {
+        print('Auth failed: $error');
+      });
+
   runApp(const MyApp());
 }
 
@@ -31,10 +38,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "FestivalMap",
       initialRoute: "/",
+      initialBinding: BindingsBuilder(() {
+      Get.put(HomePageViewController());
+    }),
       theme: ThemeData(primarySwatch: Colors.pink,),
       getPages: [
         GetPage(name: '/',                   page: () => const FestivalMap()        ),
-        GetPage(name: '/HomePage',           page: () => const HomePage(),          ),
+        GetPage(
+          name: '/HomePage',
+          page: () => const HomePage(),
+        ),
         GetPage(name: '/MapPage',            page: () => const MapPage(),           ),
         GetPage(name: '/MyPage',             page: () => const MyPage(),            ),
         GetPage(name: '/Bookmark',           page: () => const Bookmark(),          ),
@@ -62,7 +75,7 @@ class _FestivalMapState extends State<FestivalMap> {
 
     Timer(Duration(seconds: 1), (){
         Get.offAll(
-          () => HomePage(),
+          () => MapPage(),
           transition: Transition.fadeIn,
           duration: Duration(seconds: 2),
         );
@@ -74,12 +87,10 @@ class _FestivalMapState extends State<FestivalMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         child: Image.asset("assets/엄우넹.png"),
         alignment: Alignment.center,
       ),
-
     );
   }
 }
