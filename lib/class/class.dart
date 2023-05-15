@@ -41,7 +41,6 @@ class Fest {
     required this.image});
 
   factory Fest.fromJson(Map<String,dynamic> json){
-
     Fest n = Fest(
       category: List<String>.from(json["category"]),
       fName : json['fName'],
@@ -53,7 +52,8 @@ class Fest {
       fStars : json['fStars'],
       image : json['image'],
     );
-    print(n);
+
+
     return n;
   }
   Map<String, dynamic> toJson() => {

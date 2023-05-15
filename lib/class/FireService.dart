@@ -56,10 +56,7 @@ class FireService{
     //모든 축제 데이터 들고오기
     QuerySnapshot<Map<String,dynamic>> _snapshot =
     await FirebaseFirestore.instance.collection("Fest").get();
-
-    //print(_snapshot.docs[0].data());
     List<Fest> _result = _snapshot.docs.map((e) => Fest.fromJson(e.data())).toList();
-    print("hi");
     return _result;
   }
 

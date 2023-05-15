@@ -106,15 +106,12 @@ class _HomePageState extends State<HomePage> {
             future: FireService().readAllFests(),
             builder : (BuildContext context, AsyncSnapshot snapshot){
               if (snapshot.hasData == false){
-                print("엄");
                 return CircularProgressIndicator();
               }
               else{
-                print("준");
                 List<Fest> fest = snapshot.data;
                 fest.sort((a,b) => a.fStars.compareTo(b.fStars));
                 fest.take(3).forEach((element) {festivalNames.add(element.fName);});
-                print(List.generate(festivalNames.length, (index) => HomePageFestivalObject(festivalName: festivalNames[index])));
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
